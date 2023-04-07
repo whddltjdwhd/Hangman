@@ -1,6 +1,6 @@
 const words = document.querySelector("#words");
 const lives = document.querySelector(".showLives");
-
+const showTxt = document.querySelector(".showText");
 const generator = document.querySelector("#generate");
 const alp = document.querySelector(".alp");
 
@@ -41,4 +41,12 @@ checkAnswer.addEventListener("submit", (e) => {
             console.log("틀렸소")
         }
     }
+})
+answer.addEventListener("input", (e) => {
+    const h_2 = document.querySelector("h2");
+    if(showTxt.childElementCount > 0) {
+        showTxt.removeChild(h_2);  
+        showTxt.innerHTML = `<h2>${answer.value}</h2>`; 
+    }  
+    // console.log(answer.value);
 })
