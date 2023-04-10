@@ -12,28 +12,31 @@
         <h1>welcome to hangman page!</h1>
         <div class="main">
             <div class="showText">
-                <h2>Plaece Holder</h2>
+                <h2>Write Your Answer!</h2>
             </div>
             <div class="showLives">
                 5
             </div>
-            <form action="/dog" id="generate">
-                <label for="word">write your word</label>
-                <input type="text" name="word" id="words">
-                <button type="submit" id="btn">submit</button>
-            </form>
-            <ul class="list">
+            <div class="sub">
+                <form action="/dog" id="generate">
+                    <label for="word">write your word</label>
+                    <input type="text" name="word" id="words">
+                    <button type="submit" id="btn">submit</button>
+                </form>
+            </div>
+ 
+            <!-- <ul class="list">
                 
-            </ul>
+            </ul> -->
         </div>
-        <hr>
+
         <div class="words">
             <ul class="alp">
                 <li>the</li>
                 <li>basic</li>
             </ul>
         </div>
-        <hr>
+
         <div class="answer_container">
             <form action="/dog" id="submit_ans">
                 <label for="answer">write your answer</label>
