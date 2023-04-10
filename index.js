@@ -38,7 +38,7 @@ checkAnswer.addEventListener("submit", (e) => {
         if(saveWord == answer.value) {
             console.log("정답!");
         } else {
-            console.log("틀렸소")
+            if(lives.innerText > 0) lives.innerText--;   
         }
     }
 })
