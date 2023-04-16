@@ -1,3 +1,5 @@
+
+
 const words = document.querySelector("#words");
 const lives = document.querySelector(".showLives");
 const showTxt = document.querySelector(".showText");
@@ -7,15 +9,31 @@ const makeAnswer = document.querySelector("#makeBtn");
 const checkAnswer = document.querySelector("#checkBtn");
 const answer = document.querySelector("#answer");
 
-//답 저장
+
 let ansWord = "";
+init();
 
+//랜덤단어 생성 api를 통해 랜덤 단어를 받아와서 문제 진행.
+function init() {
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.api-ninjas.com/v1/randomword',
+        headers: { 'X-Api-Key': 'mUUeI/1dwsdtdtRYWOzkNg==edAnbLZj5kbMM0Xl' },
+        contentType: 'application/json',
+        success: function(result) {
+            console.log(result.word);
+            showNewWord(result.word);  
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+        
+    });
+    
+}
 
-
-
-//문제 제출 기능
-makeAnswer.addEventListener("click", ()=>{
-    //만약 새로 문제를 출제한다면 이전의 문자는 지움.
+function showNewWord(ans) {
+    ansWord = ans;
     if(alp.children.length > 0) {
         const childLen = alp.children.length;
         for(let j = 0; j < childLen; j++) {
@@ -23,18 +41,13 @@ makeAnswer.addEventListener("click", ()=>{
             alp.removeChild(lis);
         }
     }
-
-    let tmpWord = words.value;
-    //입력한 문자열 길이만큼 * 생성
-    for(let a of tmpWord) {
+       for(let a of ans) {
         const newLi = document.createElement('li');
         newLi.innerText = "*";
         alp.appendChild(newLi);
     }
-    // wordArr.push(words.value);
-    ansWord = words.value;
-    words.value = "";
-})
+}
+
 
 //제출한 답이 맞는지 확인
 checkAnswer.addEventListener("click", () => {
@@ -61,12 +74,3 @@ let isInclude = false;
 })
 
 
-//제출 폼의 내용을 동적으로 보여줌.
-answer.addEventListener("input", (e) => {
-    const h_2 = document.querySelector("h2");
-
-    if(showTxt.childElementCount > 0) {
-        showTxt.removeChild(h_2);  
-        showTxt.innerHTML = `<h2>${answer.value}</h2>`; 
-    }  
-})
