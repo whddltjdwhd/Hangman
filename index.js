@@ -16,7 +16,7 @@ generator.addEventListener("submit", (e)=>{
     //만약 새로 문제를 출제한다면 이전의 문자는 지움.
     if(alp.children.length > 0) {
         const childLen = alp.children.length;
-        for(let i = 0; i < childLen; i++) {
+        for(let j = 0; j < childLen; j++) {
             const lis = document.querySelector("li");
             alp.removeChild(lis);
         }
@@ -39,16 +39,24 @@ checkAnswer.addEventListener("submit", (e) => {
     //답 체크 변수
     const checkAns = answer.value;
     let isInclude = false;
-
+    let idx = 0;
     //제풀한 문자열이 답에 포함되어 있는 문자인지 확인.
     //만약 답에 해당 문자가 있다면 오픈.
     for(let i = 0; i < checkAns.length; i++) {
-        if(ansWord.includes(checkAns[i])) {
-            let idx = ansWord.indexOf(checkAns[i]);
-            alp.children[idx].innerText = ansWord[idx];
-            isInclude = true;
+        for(let j = 0; j < ansWord.length; j++) {
+            // if(ansWord.includes(checkAns[j], j)) {
+            //     idx = ansWord.indexOf(checkAns[j]);
+            //     alp.children[idx].innerText = ansWord[idx];
+    
+            //     isInclude = true;
+            // }
+            if(checkAns[i] == ansWord[j]) {
+                alp.children[j].innerText = ansWord[j];
+                isInclude = true;
+            }
         }
     }
+
     //해당하는 문자가 아무것도 없다면
     if(!isInclude) {
         if(lives.innerText > 1) lives.innerText--; 
