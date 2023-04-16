@@ -54,18 +54,18 @@ checkAnswer.addEventListener("submit", (e) => {
         if(lives.innerText > 1) lives.innerText--; 
         else alert("GAME OVER")
     }
-
-
-
-
+    answer.value = "";
 })
+
 
 //제출 폼의 내용을 동적으로 보여줌.
 answer.addEventListener("input", (e) => {
     const h_2 = document.querySelector("h2");
+
     if(showTxt.childElementCount > 0) {
         showTxt.removeChild(h_2);  
         showTxt.innerHTML = `<h2>${answer.value}</h2>`; 
     }  
+    
     // console.log(answer.value);
 })
