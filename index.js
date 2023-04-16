@@ -1,17 +1,12 @@
-
-
-const words = document.querySelector("#words");
 const lives = document.querySelector(".showLives");
-const showTxt = document.querySelector(".showText");
 const alp = document.querySelector(".alp");
 
 const makeAnswer = document.querySelector("#makeBtn");
 const checkAnswer = document.querySelector("#checkBtn");
 const answer = document.querySelector("#answer");
 
-
 let ansWord = "";
-init();
+let cnt = 0;
 
 //랜덤단어 생성 api를 통해 랜덤 단어를 받아와서 문제 진행.
 function init() {
@@ -61,6 +56,7 @@ let isInclude = false;
             if(checkAns[i] == ansWord[j]) {
                 alp.children[j].innerText = ansWord[j];
                 isInclude = true;
+       
             }
         }
     }
@@ -71,6 +67,18 @@ let isInclude = false;
         else alert("GAME OVER")
     }
     answer.value = "";
+    checkEnd();
 })
 
+//게임의 끝을 판단하는 함수.
+function checkEnd() {
+    for(let j = 0; j < ansWord.length; j++) {
+        // console.log(alp.children[j].textContent);
+        if(alp.children[j].textContent == ansWord[j]) cnt++;
+    }
+    // console.log(cnt);
+    if(cnt == ansWord.length) alert("끝");
+}
 
+
+init();
