@@ -7,10 +7,13 @@ const alp = document.querySelector(".alp");
 const checkAnswer = document.querySelector(".answer_container");
 const answer = document.querySelector("#answer");
 
-let saveWord = "";
+//답 저장
+let ansWord = "";
 
+//문제 제출 기능
 generator.addEventListener("submit", (e)=>{
     e.preventDefault();
+    //만약 새로 문제를 출제한다면 이전의 문자는 지움.
     if(alp.children.length > 0) {
         const childLen = alp.children.length;
         for(let i = 0; i < childLen; i++) {
@@ -20,28 +23,44 @@ generator.addEventListener("submit", (e)=>{
     }
 
     let tmpWord = words.value;
-
+    //입력한 문자열 길이만큼 * 생성
     for(let a of tmpWord) {
         const newLi = document.createElement('li');
-        newLi.innerText = a;
+        newLi.innerText = "*";
         alp.appendChild(newLi);
     }
     // wordArr.push(words.value);
-    saveWord = words.value;
+    ansWord = words.value;
     words.value = "";
 })
-
+//제출한 답이 맞는지 확인
 checkAnswer.addEventListener("submit", (e) => {
     e.preventDefault();
-    if(saveWord == "") alert("정답이 아직 없소..");
-    else {
-        if(saveWord == answer.value) {
-            console.log("정답!");
-        } else {
-            if(lives.innerText > 0) lives.innerText--;   
+    //답 체크 변수
+    const checkAns = answer.value;
+    let isInclude = false;
+
+    //제풀한 문자열이 답에 포함되어 있는 문자인지 확인.
+    //만약 답에 해당 문자가 있다면 오픈.
+    for(let i = 0; i < checkAns.length; i++) {
+        if(ansWord.includes(checkAns[i])) {
+            let idx = ansWord.indexOf(checkAns[i]);
+            alp.children[idx].innerText = ansWord[idx];
+            isInclude = true;
         }
     }
+    //해당하는 문자가 아무것도 없다면
+    if(!isInclude) {
+        if(lives.innerText > 1) lives.innerText--; 
+        else alert("GAME OVER")
+    }
+
+
+
+
 })
+
+//제출 폼의 내용을 동적으로 보여줌.
 answer.addEventListener("input", (e) => {
     const h_2 = document.querySelector("h2");
     if(showTxt.childElementCount > 0) {

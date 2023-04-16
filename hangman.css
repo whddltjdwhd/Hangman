@@ -6,7 +6,12 @@ body {
     text-align: center;
     width: 50%;
     margin: 10% auto;
-    padding: 15px 0;
+}
+.container h1 {
+    display: block;
+    background-color: rgb(177, 252, 220);
+    height: 50px;
+    line-height: 50px;
 }
 .showText {
     background-color: rgb(201, 224, 201);
@@ -35,6 +40,10 @@ body {
 }
 .words {
     background-color: rgb(172, 173, 247);
+    
+}
+.alp {
+    margin: 0;
 }
 
 .words li {
