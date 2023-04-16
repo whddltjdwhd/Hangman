@@ -76,8 +76,9 @@ function checkEnd() {
         // console.log(alp.children[j].textContent);
         if(alp.children[j].textContent == ansWord[j]) cnt++;
     }
-    // console.log(cnt);
+    console.log(cnt);
     if(cnt == ansWord.length) alert("끝");
+    cnt = 0;
 }
 
 
