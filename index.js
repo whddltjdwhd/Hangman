@@ -3,6 +3,7 @@ const alp = document.querySelector(".alp");
 
 const checkAnswer = document.querySelector("#checkBtn");
 const answer = document.querySelector("#answer");
+const API_KEY = config.apiKey;
 
 let ansWord = "";
 
@@ -11,7 +12,7 @@ function init() {
     $.ajax({
         method: 'GET',
         url: 'https://api.api-ninjas.com/v1/randomword',
-        headers: { 'X-Api-Key': 'mUUeI/1dwsdtdtRYWOzkNg==edAnbLZj5kbMM0Xl' },
+        headers: { 'X-Api-Key': API_KEY},
         contentType: 'application/json',
         success: function(result) {
             let word = result.word;
