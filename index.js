@@ -6,6 +6,7 @@ const answer = document.querySelector("#answer");
 const API_KEY = config.apiKey;
 
 let ansWord = "";
+let reStart = false;
 
 //랜덤단어 생성 api를 통해 랜덤 단어를 받아와서 문제 진행.
 function init() {
@@ -68,7 +69,11 @@ function doCheckAnswer() {
     }
     
     //해당하는 문자가 아무것도 없다면
-    if(!isInclude && lives.innerText-- <= 1) alert("GAME OVER");
+    if(!isInclude && lives.innerText-- <= 1) {
+        reStart = confirm("다시 도전하시겠습니까?");
+        reStartGame();
+    }
+        
     
     answer.value = "";
     checkEnd();
@@ -79,7 +84,12 @@ function checkEnd() {
     for(let j = 0; j < ansWord.length; j++) {
         if(alp.children[j].textContent != ansWord[j]) return;
     }
-    alert("끝");
+    reStart = confirm("1게임 더 하시겠습니까?");
+    reStartGame();
+}
+
+function reStartGame() {
+    reStart ? window.location.reload() : alert("GOOD BYE.");
 }
 
 init();
