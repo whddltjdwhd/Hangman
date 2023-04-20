@@ -1,8 +1,9 @@
 const lives = document.querySelector(".showLives");
 const alp = document.querySelector(".alp");
-
+const container = document.querySelector(".container h1");
 const checkAnswer = document.querySelector("#checkBtn");
 const answer = document.querySelector("#answer");
+const answer_container = document.querySelector(".answer_container");
 const API_KEY = config.apiKey;
 
 let ansWord = "";
@@ -67,13 +68,13 @@ function doCheckAnswer() {
             }
         }
     }
+    //기존에 제출한 문자 넣으면 점수 감산하는 거
     
     //해당하는 문자가 아무것도 없다면
     if(!isInclude && lives.innerText-- <= 1) {
         reStart = confirm("다시 도전하시겠습니까?");
         reStartGame();
     }
-        
     
     answer.value = "";
     checkEnd();
@@ -89,7 +90,29 @@ function checkEnd() {
 }
 
 function reStartGame() {
-    reStart ? window.location.reload() : alert("GOOD BYE.");
+    if(reStart) window.location.reload()
+    alert("GOOD BYE.");
+    drawGoodBye();
 }
 
+function drawGoodBye() {
+    container.innerHTML = "It was a Good Game.";
+    alp.innerHTML = "";
+    const bye = "GOOD BYE";
+
+    for(let ch of bye) {
+        const li = document.createElement("li");
+        li.innerText = ch;
+        alp.appendChild(li);
+    }
+
+    answer_container.innerHTML = "";
+}
+
+//시험중
+function localStorage() {
+    window.localStorage.setItem('theme','dark');
+    const name = window.localStorage.getItem("hi");
+}
 init();
+
